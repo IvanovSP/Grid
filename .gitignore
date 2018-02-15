@@ -1,0 +1,12 @@
+node_modules
+
+src/client.min.js
+
+.DS_Store
+*.log
+
+/.idea
+atlassian-ide-plugin.xml
+nbproject/
+.vscode
+.history
