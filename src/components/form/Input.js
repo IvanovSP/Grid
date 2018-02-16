@@ -2,10 +2,18 @@ import React from 'react';
 
 export default class Input extends React.Component{
 	render() {
+		const {label, name, inputNumber, handler, val} = this.props;
 		return (
 			<div class="form-group">
-				<label for="exampleInputName2">Name</label>
-				<input type="text" class="form-control" id="exampleInputName2" placeholder="Jane Doe"/>
+				<label for={`exampleInputName${inputNumber}`} >{label}</label>
+				<input
+					type="text"
+					name={name}
+					onChange={handler}
+					value={val}
+					class="form-control"
+					id={`exampleInputName${inputNumber}`}
+				/>
 			</div>
 		);
 	}

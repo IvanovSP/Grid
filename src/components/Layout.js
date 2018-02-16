@@ -21,9 +21,14 @@ export default class Layout extends React.Component{
 		};
 	}
 
+	addToCollection(row) {
+		let collection = {...this.state.collection};
+		collection.rows.push(row);
+		this.setState({collection});
+	}
+
 	render() {
 		const {title, collection} = this.state;
-
 
 		const valuesFormat = {phone: {expression: /(\d{3})(\d{3})(\d{1})/, substring: '$1-$2-$3'}}
 
@@ -36,7 +41,10 @@ export default class Layout extends React.Component{
 							collection={collection}
 							valuesFormat={valuesFormat}
 						/>
-						<Form values={collection.columns}/>
+						<Form
+							values={collection.columns}
+							submit={this.addToCollection.bind(this)}
+						/>
 					</div>
 				</div>
 			</div>
