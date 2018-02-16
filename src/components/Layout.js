@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from './Header';
 import Table from './table/Table';
+import Form from './form/Form';
 
 export default class Layout extends React.Component{
 	constructor() {
@@ -14,50 +15,28 @@ export default class Layout extends React.Component{
 					{header: 'E-mail', field: 'email'},
 				],
 				rows: [
-					{user: 'Sergey', phone: 111213123, email: 'test@test.com'}
+					{user: 'Sergey', phone: 1112143, email: 'test@test.com'}
 				]
 			},
 		};
 	}
 
-	removeRow() {
-
-	}
-
 	render() {
 		const {title, collection} = this.state;
-		const action = {
-			method: this.removeRow.bind(this),
-			icon: 'glyphicon-remove',
-			label: 'Remove'
-		};
+
+
+		const valuesFormat = {phone: {expression: /(\d{3})(\d{3})(\d{1})/, substring: '$1-$2-$3'}}
 
 		return (
 			<div class="container">
 				<div class="row">
 					<div class="col-md-10 col-md-offset-1">
-
-						<Header
-							text={title}
-						/>
-
+						<Header text={title}/>
 						<Table
-							action={action}
 							collection={collection}
+							valuesFormat={valuesFormat}
 						/>
-
-						<form class="form-inline">
-							<div class="form-group">
-								<label for="exampleInputName2">Name</label>
-								<input type="text" class="form-control" id="exampleInputName2" placeholder="Jane Doe"/>
-							</div>
-							<div class="form-group">
-								<label for="exampleInputEmail2">Email</label>
-								<input type="email" class="form-control" id="exampleInputEmail2" placeholder="jane.doe@example.com"/>
-							</div>
-							<button type="submit" class="btn btn-default">Send invitation</button>
-						</form>
-
+						<Form values={collection.columns}/>
 					</div>
 				</div>
 			</div>
