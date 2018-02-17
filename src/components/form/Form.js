@@ -34,7 +34,7 @@ export default class Form extends React.Component{
 	}
 
 	render() {
-		const {values} = this.props;
+		const {values = []} = this.props;
 
 		const inputMap = (value, i) => {
 			return <Input

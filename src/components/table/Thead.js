@@ -2,7 +2,7 @@ import React from 'react';
 
 export default class Thead extends React.Component{
 	render() {
-		const {headers} = this.props;
+		const {headers = []} = this.props;
 
 		const tdMap = (cell, i) => {
 			return 	<th key={i}>
@@ -14,7 +14,10 @@ export default class Thead extends React.Component{
 
 		return (
 			<thead>
-				<tr>{thMapped}</tr>
+				<tr>
+					{this.props.children}
+					{thMapped}
+				</tr>
 			</thead>
 		);
 	}

@@ -13,15 +13,16 @@ export default class Trow extends React.Component{
 	}
 
 	render() {
-		const {cells, columns, valuesFormat} = this.props;
+		const {cells = {}, columns = [], valuesFormat = {}} = this.props;
 
 		const tdMap=(cell,i)=>{
-			return 	<td key={i}>{cell}</td>;
+			return 	<td class="media-body" key={i}>{cell}</td>;
 		};
 		const tdMapped = this.prepareCellsData(cells, columns, valuesFormat).map(tdMap);
 
 		return (
 			<tr>
+				{this.props.children}
 				{tdMapped}
 			</tr>
 		);

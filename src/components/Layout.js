@@ -6,7 +6,7 @@ import Form from './form/Form';
 export default class Layout extends React.Component{
 	constructor() {
 		super();
-		this.state={
+		this.state = {
 			title: 'Grid',
 			collection: {
 				columns: [
@@ -27,8 +27,14 @@ export default class Layout extends React.Component{
 		this.setState({collection});
 	}
 
+	removeFromCollection(i) {
+		let collection = {...this.state.collection};
+		collection.rows.splice(i, 1);
+		this.setState({collection});
+	}
+
 	render() {
-		const {title, collection} = this.state;
+		const {title = '', collection = []} = this.state;
 
 		const valuesFormat = {phone: {expression: /(\d{3})(\d{3})(\d{1})/, substring: '$1-$2-$3'}}
 
@@ -40,6 +46,7 @@ export default class Layout extends React.Component{
 						<Table
 							collection={collection}
 							valuesFormat={valuesFormat}
+							removeRow={this.removeFromCollection.bind(this)}
 						/>
 						<Form
 							values={collection.columns}
