@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export default function Thead({ headers, children }) {
-  const tdMap = (cell, i) => <th key={i}> {cell.header} </th>;
+  const tdMap = (cell, i) => <th key={i}>{cell.header}</th>;
   const thMapped = headers.map(tdMap);
   return (
     <thead>

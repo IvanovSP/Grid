@@ -55,7 +55,7 @@ export default class Table extends React.Component {
 }
 
 Table.defaultProps = {
-  collection: {},
+  collection: { rows: [] },
   valuesFormat: {},
   removeRow: (() => {}),
 };

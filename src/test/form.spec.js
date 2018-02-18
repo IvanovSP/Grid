@@ -16,7 +16,7 @@ describe('<Form />', () => {
   });
 
   it('should contains mapped <Input/> components if values array passed not empty', () => {
-    const wrapper = mount(<Form/>);
+    const wrapper = mount(<Form />);
     expect(wrapper.find(Input)).to.have.length(0);
     wrapper.setProps({ values: [{}] });
     expect(wrapper.find(Input)).to.have.length(1);
@@ -46,6 +46,13 @@ describe('<Form />', () => {
     wrapper.find('form').simulate('submit');
     expect(wrapper.state()).to.deep.include(wrapper.instance().defaultState);
   });
+
+  it('should have props for values and submit', () => {
+    const wrapper = mount(<Form values={valuesArr} />);
+    expect(wrapper.props().values).to.be.defined;
+    expect(wrapper.props().submit).to.be.defined;
+  });
+
 
   it('should set state from handleInputs method', () => {
     valuesArr = [{ field: 'testField' }];
