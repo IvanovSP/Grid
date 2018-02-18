@@ -33,8 +33,7 @@ export default class Form extends React.Component {
     }
 
     const { submit } = this.props;
-    if (submit) submit(this.state);
-
+    submit(this.state);
     this.setState(this.defaultState);
   }
 

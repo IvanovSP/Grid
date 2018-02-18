@@ -29,7 +29,7 @@
     "jsdom": "^8.1.0",
     "mocha": "^3.0.2",
     "react-addons-test-utils": "^0.14.7",
-    "sinon": "^1.17.3",
+    "sinon": "^1.17.7",
     "webpack": "^1.12.14",
     "webpack-dev-server": "^1.14.1"
   },
@@ -41,7 +41,7 @@
     "shortid": "^2.2.8"
   },
   "scripts": {
-    "test": "mocha -w src/test/helpers/browser.js test/*.test.js",
+    "test": "mocha -w src/test/helpers/browser.js src/test/*.spec.js",
     "eslint": "eslint --ext .jsx src/components",
     "grid": "webpack-dev-server --content-base src --inline --hot"
   },
