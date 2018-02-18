@@ -8,7 +8,7 @@ module.exports = {
 	},
 	context: path.join(__dirname, 'src'),
 	devtool:  'inline-sourcemap' ,
-	entry: './client.js',
+	entry: './client.jsx',
 	module: {
 		loaders: [
 			{
@@ -25,6 +25,9 @@ module.exports = {
 	output: {
 		path: __dirname + '/src/',
 		filename: 'client.min.js'
+	},
+	resolve: {
+		extensions: ['', '.js', '.jsx'],
 	},
 	plugins: []
 };

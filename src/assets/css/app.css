@@ -1,9 +1,19 @@
 tr, td {
     transition: background-color ease-out 0.1s;
 }
+
 label {
-    padding-right: 5px;
+    margin: 0;
 }
+
+input {
+    margin-left: 5px;
+}
+
 .form-group {
     padding-right: 10px;
+}
+
+.glyphicon-remove {
+    cursor: pointer;
 }
