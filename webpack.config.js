@@ -24,7 +24,7 @@ module.exports = {
 	},
 	output: {
 		path: __dirname + '/src/',
-		filename: 'client.min.js'
+		filename: 'client.js'
 	},
 	resolve: {
 		extensions: ['', '.js', '.jsx'],
