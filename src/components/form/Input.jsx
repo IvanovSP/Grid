@@ -8,6 +8,8 @@ export default function Input({
   id,
   handler,
   val,
+  valid,
+  invalidMessage,
 }) {
   return (
     <div className="form-group">
@@ -22,12 +24,15 @@ export default function Input({
           id={id}
         />
       </label>
+      <span className="error">{!valid && invalidMessage}</span>
     </div>
   );
 }
 
 Input.defaultProps = {
   handler: (() => {}),
+  invalidMessage: '',
+  valid: true,
   label: '',
   name: '',
   val: '',
@@ -36,6 +41,8 @@ Input.defaultProps = {
 
 Input.propTypes = {
   handler: PropTypes.func,
+  valid: PropTypes.bool,
+  invalidMessage: PropTypes.string,
   label: PropTypes.string,
   name: PropTypes.string,
   val: PropTypes.string,

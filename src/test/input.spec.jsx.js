@@ -8,6 +8,8 @@ describe('<Input />', () => {
   it('should have text prop', () => {
     const wrapper = shallow(<Input/>);
     expect(wrapper.props().handler).to.be.defined;
+    expect(wrapper.props().valid).to.be.defined;
+    expect(wrapper.props().invalidMessage).to.be.defined;
     expect(wrapper.props().label).to.be.defined;
     expect(wrapper.props().name).to.be.defined;
     expect(wrapper.props().val).to.be.defined;

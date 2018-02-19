@@ -47,7 +47,7 @@ describe('<Form />', () => {
     expect(wrapper.state()).to.deep.include(wrapper.instance().defaultState);
   });
 
-  it('should have props for values and submit', () => {
+  it('should have props for values, submit, valuesValidators', () => {
     const wrapper = mount(<Form values={valuesArr} />);
     expect(wrapper.props().values).to.be.defined;
     expect(wrapper.props().submit).to.be.defined;

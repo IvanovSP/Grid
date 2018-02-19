@@ -7,38 +7,58 @@ import Button from './Button';
 export default class Form extends React.Component {
   constructor(props) {
     super(props);
-    const { values } = props;
+    const { values, valuesValidators } = props;
     const defaultState = {};
     values.forEach((value) => { defaultState[value.field] = ''; });
-    this.state = { ...defaultState };
     this.defaultState = defaultState;
+    const formValidators = {};
+    valuesValidators.forEach((validator) => {
+      formValidators[validator.field] = validator;
+      formValidators[validator.field].valid = true;
+    });
+    this.state = { inputs: defaultState, formValidators };
     this.validate = this.validate.bind(this);
     this.handleInputs = this.handleInputs.bind(this);
   }
 
   handleInputs(event) {
     const { name, value } = event.target;
-    this.setState({ [name]: value });
+    const { inputs } = this.state;
+    this.setState({
+      inputs: { ...inputs, [name]: value },
+    });
   }
 
   validate(event) {
     event.preventDefault();
-    const keys = Object.keys(this.state);
-    const formIsValid = keys.some(i => this.state[i].trim() === '');
-    if (formIsValid) {
+    const keys = Object.keys(this.state.inputs);
+    const formIsEpmty = keys.some(i => this.state.inputs[i].trim() === '');
+    if (formIsEpmty) {
       /* eslint-disable no-alert */
       alert('Fill all inputs');
       /* eslint-enable no-alert */
       return;
     }
-
     const { submit } = this.props;
-    submit(this.state);
-    this.setState(this.defaultState);
+    const { formValidators } = this.state;
+
+    let valid = true;
+    keys.forEach((i) => {
+      const validator = formValidators[i];
+      if (validator) {
+        validator.valid = validator.validate(this.state.inputs[i]);
+        if (!validator.valid) valid = false;
+      }
+    });
+    this.setState({ formValidators });
+    if (!valid) return;
+    // const valueValidator = valuesValidators.find(validator => validator.field === )
+    submit(this.state.inputs);
+    this.setState({ inputs: this.defaultState });
   }
 
   render() {
-    const { values = [] } = this.props;
+    const { values } = this.props;
 
     const inputMap = (value, i) => (<Input
       key={i}
@@ -46,7 +66,9 @@ export default class Form extends React.Component {
       handler={this.handleInputs}
       label={value.header}
       name={value.field}
-      val={this.state[value.field]}
+      val={this.state.inputs[value.field]}
+      valid={this.state.formValidators[value.field] && this.state.formValidators[value.field].valid}
+      invalidMessage={this.state.formValidators[value.field] && this.state.formValidators[value.field].message}
     />);
 
     const inputMaped = values.map(inputMap);
@@ -63,9 +85,11 @@ export default class Form extends React.Component {
 Form.defaultProps = {
   submit: (() => {}),
   values: [],
+  valuesValidators: [],
 };
 
 Form.propTypes = {
   submit: PropTypes.func,
   values: PropTypes.arrayOf(PropTypes.object),
+  valuesValidators: PropTypes.arrayOf(PropTypes.object),
 };

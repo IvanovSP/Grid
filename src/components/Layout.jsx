@@ -42,6 +42,22 @@ export default class Layout extends React.Component {
 
     const valuesFormat = { phone: { expression: /(\d{3})(\d{3})(\d{1})/, substring: '$1-$2-$3' } };
 
+    const valuesValidators = [{
+      field: 'email',
+      validate: (((value) => {
+        const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(String(value).toLowerCase());
+      })),
+      message: 'E-mail is invalid',
+    }, {
+      field: 'phone',
+      validate: (((value) => {
+        const re = /^\d+$/;
+        return re.test(String(value).toLowerCase());
+      })),
+      message: 'Use only numbers',
+    }];
+
     return (
       <div className="container">
         <div className="row">
@@ -54,6 +70,7 @@ export default class Layout extends React.Component {
             />
             <Form
               values={collection.columns}
+              valuesValidators={valuesValidators}
               submit={this.addToCollection}
             />
           </div>

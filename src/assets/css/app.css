@@ -17,3 +17,14 @@ input {
 .glyphicon-remove {
     cursor: pointer;
 }
+
+.form-group {
+    position: relative;
+}
+
+.error {
+    color: red;
+    position: absolute;
+    right: 10px;
+    bottom: -20px;
+}

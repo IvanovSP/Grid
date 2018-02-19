@@ -1,7 +1,10 @@
 {
-    "extends": "airbnb",
-    "globals": {
-        "alert": true,
-        "document": true
-    }
+  "extends": "airbnb",
+  "globals": {
+      "alert": true,
+      "document": true
+  },
+  "rules": {
+  "no-useless-escape": "off"
+  }
 }
